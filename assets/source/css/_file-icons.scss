@@ -1,0 +1,20 @@
+.form-content.file-list .file .file-template-inner .file-logo{
+    &.misc{
+        background-image: url($image-assets + 'misc.svg') !important;
+    }
+    &.audio{
+        background-image: url($image-assets + 'audio.svg') !important;
+    }
+    &.spreadsheet{
+        background-image: url($image-assets + 'xl.svg') !important;
+    }
+    &.compressed{
+        background-image: url($image-assets + 'zip.svg') !important;
+    }
+    &.pdf{
+        background-image: url($image-assets + 'pdf.svg') !important;
+    }
+    &.photoshop{
+        background-image: url($image-assets + 'photoshop.svg') !important;
+    }
+}

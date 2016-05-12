@@ -1,0 +1,81 @@
+/*
+ * Mixins, variables, and sass related things
+*/
+
+$xor-green: #b0e57c;
+$xor-blue: #56baec;
+$xor-yellow: #ffec94;
+
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Source+Sans+Pro);
+$open-sans: 'Open Sans', sans-serif;
+$source-sans: 'Source Sans Pro', sans-serif;
+
+/* Media Qs */
+$small: 640px;
+$medium: 1024px;
+$large: 1440px;
+
+/* Dirs */
+$image-assets: '../../img/';
+
+@mixin tiny{
+    @media (max-width: #{$small - 1px}){
+        @content;
+    }
+}
+
+@mixin small{
+    @media (min-width: #{$small}) and (max-width: #{$medium - 1px}){
+        @content;
+    }
+}
+
+@mixin medium{
+    @media (min-width: #{$medium}) and (max-width: #{$large - 1px}){
+        @content;
+    }
+}
+
+@mixin large{
+    @media (min-width: #{$large}){
+        @content;
+    }
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    font-variant-ligatures: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    position: relative;
+}
+
+// Clearfix
+.clearfix{
+    &:after{
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+// Hide elements
+.hide{
+    height: 0;
+    width: 0;
+    display: none;
+    visibility: hidden;
+}
+
+@import 'index';
+@import 'file-icons';
