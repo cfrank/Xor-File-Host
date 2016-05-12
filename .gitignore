@@ -1,3 +1,4 @@
 node_modules/
 logs/
 assets/build/
+assets/source/babel/
