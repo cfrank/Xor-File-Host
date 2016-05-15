@@ -1,4 +1,3 @@
-import FileAdd from './fileadd';
 import Files from './Files';
 
 export default class Xor
