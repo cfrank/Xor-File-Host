@@ -1,10 +1,10 @@
 import FileAdd from './fileadd';
+import Files from './Files';
 
 export default class Xor
 {
     private upload_trigger: HTMLElement = document.getElementById('js-upload-trigger');
     private upload_input: HTMLElement = document.getElementById('js-upload-input');
-    private files: FileList;
 
     constructor(){
         this.init_event_listeners();
@@ -36,14 +36,12 @@ export default class Xor
     private on_file_upload(event: Event): void{
         // Cast the event target to InputElement to recieve the files
         let eventTarget: HTMLInputElement = <HTMLInputElement>event.target;
-        this.files = eventTarget.files;
-
+        let files: FileList = eventTarget.files;
+        
         // Show the files list
         this.show_file_list();
 
-        for(let i:number = 0; i < this.files.length; ++i){
-            new FileAdd(this.files[i], i);
-        }
+        new Files(files);
     }
 
     /**

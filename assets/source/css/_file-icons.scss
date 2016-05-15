@@ -2,6 +2,9 @@
     &.misc{
         background-image: url($image-assets + 'misc.svg') !important;
     }
+    &.illustrator{
+        background-image: url($image-assets + 'illustrator.svg') !important;
+    }
     &.audio{
         background-image: url($image-assets + 'audio.svg') !important;
     }
@@ -16,5 +19,17 @@
     }
     &.photoshop{
         background-image: url($image-assets + 'photoshop.svg') !important;
+    }
+    &.ppt{
+        background-image: url($image-assets + 'ppt.svg') !important;
+    }
+    &.text{
+        background-image: url($image-assets + 'doc.svg') !important;
+    }
+    &.video{
+        background-image: url($image-assets + 'video.svg') !important;
+    }
+    &.xl{
+        background-image: url($image-assets + 'xl.svg') !important;
     }
 }
