@@ -2,3 +2,4 @@ node_modules/
 logs/
 assets/build/
 assets/source/babel/
+server/includes/private.inc.php

@@ -14,6 +14,9 @@ export default class Files
         for (let i: number = 0; i < this.files_length; ++i){
             this.add_file(files[i], i);
         }
+
+        // Start uploading the file
+        
     }
 
     /*
