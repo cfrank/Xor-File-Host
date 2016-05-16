@@ -1,4 +1,5 @@
 import SingleFile from './File';
+import FileUpload from './FileUpload';
 /*
  * Takes a list of files being uploaded
  */
@@ -16,7 +17,7 @@ export default class Files
         }
 
         // Start uploading the file
-        
+        let upload = new FileUpload('server/upload.php', files);
     }
 
     /*
