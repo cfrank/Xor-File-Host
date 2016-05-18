@@ -1,71 +1,60 @@
 /*
- * Models an event with generic sender and arguments
+ * Holds an EventEmitter
  */
-interface IEvent<TSender, TArgs> {
-    subscribe(func: (sender: TSender, args: TArgs) => void): void;
-    unsubscribe(func: (sender: TSender, args: TArgs) => void): void;
+interface EventEmitter{
+    func: Function;
+    context: Object;
+    once: boolean;
 }
 
 /*
- * Event dispatcher handles storing the subscriptions and handles the
- * functions of the event
+ * Holds a collection of EventEmitters
+ * by a named index
  */
-class EventDispatcher<TSender, TArgs> implements IEvent<TSender, TArgs>
-{
-    /* Stores the subscriptions */
-    private _subscriptions: Array<(sender: TSender, args: TArgs) => void> =
-            new Array<(sender: TSender, args: TArgs) => void>();
+interface EventEmitters{
+    [index: string]: Array<EventEmitter>;
+}
+
+export default class EventEmit{
+    /*
+     * Minimal event emitter based on
+     * eventemitter3 and written in Typescript
+     */
+    constructor(){};
 
     /*
-     * Listen to events from the subscriptions
+     * Holds the asigned EventEmitters by name
      */
-    subscribe(func: (sender: TSender, args: TArgs) => void): void{
-        if(func){
-            this._subscriptions.push(func);
+    private _events: EventEmitters = undefined;
+
+    /*
+     * Return a list of assigned event listeners
+     * If the exists param is sent as well return
+     * wheither a listeners exists for that event
+     *
+     * @Returns {Array} = Array of listeners
+     * @Returns {Boolean} = If there are listeners
+     */
+    listeners(event: string, exists?: boolean): boolean | Array<Function>{
+        let available: Array<EventEmitter> | boolean;
+
+        available = this._events && this._events[event];
+
+        if(!exists == null){
+            return !!available;
         }
-    }
 
-    /*
-     * Stop listening to events from the subscriptions
-     */
-    unsubscribe(func: (sender: TSender, args: TArgs) => void): void{
-        if(func){
-            let i: number = this._subscriptions.indexOf(func);
-            if(i >= 0){
-                this._subscriptions.splice(i, 1);
-            }
+        if(!available){
+            // If there are no e. listeners return empty array
+            return [];
         }
-    }
 
-    /*
-     * Dispatch the event
-     */
-    dispatch(sender: TSender, args: TArgs): void{
-        for(let handler of this._subscriptions){
-            handler(sender, args);
+        if(this._events[event].length === 1 && available[0].func !== null){
+            return [available[0].func] as Array<Function>;
+        }
+
+        for (let i: number = 0, l: number = this._events[event].length; i < l; ++i){
+
         }
     }
 }
-
-/*
- * Storage class for multiple named events
- */
-class EventList<TSender, TArgs>
-{
-    private _events: {
-        [name: string]: EventDispatcher<TSender, TArgs>;
-    } = {};
-
-    get(name: string): EventDispatcher<TSender, TArgs>{
-        let event: EventDispatcher<TSender, TArgs> = this._events[name];
-
-        if(event){
-            return event;
-        }
-
-        event = new EventDispatcher<TSender, TArgs>();
-        this._events[name] = event;
-        return event;
-    }
-}
-

@@ -39,7 +39,8 @@ gulp.task('typescript:es6', function()
         .pipe(typescript({
             'module': 'es6',
             'target': 'es6',
-            'noImplicitAny': true
+            'noImplicitAny': true,
+            'suppressImplicitAnyIndexErrors': true
         }))
         .pipe(gulp.dest(source_path.babel_dir));
 });

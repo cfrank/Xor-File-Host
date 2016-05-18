@@ -1,10 +1,7 @@
-export default class FileUpload
-{
-    be_file: string;
-    files: FileList;
+import './Events/Events';
 
-    constructor(be_file: string, files: FileList){
-        this.be_file = be_file;
-        this.files = files;
+export default class FileUpload{
+    constructor(string: string, files: FileList){
+        console.log(files);
     }
 }
