@@ -38,12 +38,12 @@ export default class EventEmit{
      * @Returns {Array} = Array of listeners
      * @Returns {Boolean} = If there are listeners
      */
-    public listeners(event: string, exists?: boolean): boolean | Array<Function>{
+    public listeners(event: string, exists: boolean): boolean | Array<Function>{
         let available: Array<EventEmitter> | boolean;
 
         available = this._events && this._events[event];
 
-        if(!exists == null){
+        if(exists === true){
             return !!available;
         }
 
@@ -88,7 +88,10 @@ export default class EventEmit{
             /* If there is only one event to call */
 
             if(listeners[0].once === true){
-                /* Remove event listener becuase it is only to be run once */
+                this.removeListener(event,
+                                    listeners[0].func,
+                                    listeners[0].context,
+                                    true);
             }
 
             if(listeners[0].context){
@@ -106,7 +109,10 @@ export default class EventEmit{
 
             for (let i: number = 0; i < event_length; ++i){
                 if(listeners[i].once === true){
-                    /* Remove event listener becuase it is only to be run once */
+                    this.removeListener(event,
+                                        listeners[i].func,
+                                        listeners[i].context,
+                                        true);
                 }
 
                 if(listeners[i].context){

@@ -21,9 +21,11 @@ export default class Files
 
         upload.on('UploadStart', (hello: string) => {
             console.log(`HELLO WORLD ${hello}`);
-        },false);
+        },this, false);
 
         upload.test();
+
+        console.log(upload.listeners('UploadStart', true));
     }
 
     /*
