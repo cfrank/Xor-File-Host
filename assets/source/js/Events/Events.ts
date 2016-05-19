@@ -131,7 +131,7 @@ export default class EventEmit{
      * @Param once = (Optional) If the event should only be fired once
      */
     public on(event: string, func: Function, context: any, once?: boolean): void{
-        let listener: EventEmitter;
+        let listener: EventEmitter = Object.create(null);
         listener.func = func;
         listener.context = context || this;
         listener.once = (once != null && once != false) ? true : false;
@@ -144,6 +144,7 @@ export default class EventEmit{
 
         if(this._events[event] == null){
             /* If this is the first listener on the event */
+            this._events[event] = [];
             this._events[event][0] = listener;
         }
         else{

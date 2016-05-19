@@ -18,6 +18,12 @@ export default class Files
 
         // Start uploading the file
         let upload = new FileUpload('server/upload.php', files);
+
+        upload.on('UploadStart', (hello: string) => {
+            console.log(`HELLO WORLD ${hello}`);
+        },false);
+
+        upload.test();
     }
 
     /*
