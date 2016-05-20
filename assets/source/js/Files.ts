@@ -17,15 +17,22 @@ export default class Files
         }
 
         // Start uploading the file
-        let upload = new FileUpload('server/upload.php', files);
+        let upload: FileUpload = new FileUpload('server/upload.php', files);
 
         upload.on('UploadStart', (hello: string) => {
             console.log(`HELLO WORLD ${hello}`);
         },this, false);
 
+        upload.on('WelcomeToJungle', () => {
+            console.log('Jungle');
+        },this, false);
+
         upload.test();
 
         console.log(upload.listeners('UploadStart', true));
+        console.log(upload);
+        upload.removeAllListeners();
+        console.log(upload);
     }
 
     /*

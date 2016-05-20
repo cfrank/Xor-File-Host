@@ -15,7 +15,8 @@ interface EventEmitters {
     [index: string]: Array<EventEmitter>;
 }
 
-export default class EventEmit{
+export default class TEventEmit
+{
     /*
      * Minimal event emitter based on
      * eventemitter3 and written in Typescript

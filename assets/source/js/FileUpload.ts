@@ -1,6 +1,6 @@
-import EventEmit from './Events/Events';
+import TEventEmit from './Events/TEventEmit';
 
-export default class FileUpload extends EventEmit {
+export default class FileUpload extends TEventEmit {
     constructor(string: string, files: FileList){
         super();
         console.log(files);
