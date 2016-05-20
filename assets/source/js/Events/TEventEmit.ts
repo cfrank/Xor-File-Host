@@ -176,7 +176,7 @@ export default class TEventEmit
             temp_events: Array<EventEmitter> = [];
 
         if(func){
-            if(listeners[0].func){
+            if(listeners[0].func && listeners.length === 1){
                 if(listeners[0].func !== func || 
                     (once != null && listeners[0].once === false) ||
                     (context != null && listeners[0].context !== context)){
