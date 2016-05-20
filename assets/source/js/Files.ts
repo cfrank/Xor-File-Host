@@ -1,5 +1,5 @@
 import SingleFile from './File';
-import FileUpload from './FileUpload';
+import FileListUpload from './FileUpload';
 /*
  * Takes a list of files being uploaded
  */
@@ -17,22 +17,7 @@ export default class Files
         }
 
         // Start uploading the file
-        let upload: FileUpload = new FileUpload('server/upload.php', files);
-
-        upload.on('UploadStart', (hello: string) => {
-            console.log(`HELLO WORLD ${hello}`);
-        },this, false);
-
-        upload.on('WelcomeToJungle', () => {
-            console.log('Jungle');
-        },this, false);
-
-        upload.test();
-
-        console.log(upload.listeners('UploadStart', true));
-        console.log(upload);
-        upload.removeAllListeners();
-        console.log(upload);
+        let upload: FileListUpload = new FileListUpload('server/upload.php', files);
     }
 
     /*
