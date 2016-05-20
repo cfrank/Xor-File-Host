@@ -13,11 +13,11 @@ export default class Xor
      * Start listening to elements for changes
      */
     private init_event_listeners():void {
-        this.upload_trigger.addEventListener('click', () =>{
+        this.upload_trigger.addEventListener('click', (): void =>{
             this.open_upload_dialog();
         });
 
-        this.upload_input.addEventListener('change', (event: Event) =>{
+        this.upload_input.addEventListener('change', (event: Event): void =>{
             this.on_file_upload(event);
         });
     }
