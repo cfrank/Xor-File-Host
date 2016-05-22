@@ -46,6 +46,11 @@
                         font-size: 16px;
                         color: #717171;
                     }
+
+                    & > p.error{
+                        text-align: center;
+                        color: #e57c7c;
+                    }
                 }
 
                 .upload-button{
@@ -131,14 +136,14 @@
                     }
 
                     .file-progress{
-                        width: 50%;
+                        width: 0%;
                         height: 100%;
                         background-color: #f6f6f6;
                         position: absolute;
                         top: 0;
                         left: 0;
                         bottom: 0;
-                        transition: background-color 0.5s;
+                        transition: width 0.2s, background-color 0.5s;
                         z-index: 1;
                     }
 

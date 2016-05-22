@@ -76,7 +76,6 @@ export class FileListUpload extends TEventEmit {
         }, false);
 
         xhr.upload.addEventListener('load', (e: ProgressEvent): void =>{
-            console.log('finished');
             this.emit('load', [e]);
         }, false);
 

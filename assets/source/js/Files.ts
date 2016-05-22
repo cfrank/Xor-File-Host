@@ -1,5 +1,6 @@
 import SingleFile from './File';
 import * as Upload from './FileUpload';
+import * as Error from './Error';
 /*
  * Takes a list of files being uploaded
  */
@@ -12,8 +13,11 @@ export default class Files
         this.files = files;
         this.files_length = files.length;
 
-        for (let i: number = 0; i < this.files_length; ++i){
-            this.add_file(files[i], i);
+        try{
+            this.add_files_to_page(files);
+        }
+        catch(e){
+            return;
         }
 
         // Start uploading the file
@@ -28,6 +32,10 @@ export default class Files
                 file_progress.style.width = files[i].percent_uploaded + '%';
             }
         }, false);
+
+        upload.on('load', (event: ProgressEvent): void =>{
+            console.log(event);
+        }, true);
     }
 
     /*
@@ -47,8 +55,15 @@ export default class Files
     /*
      * Add a file to the page
      */
-    private add_file(file: File, index: number): void{
-        new SingleFile(file, index);
+    private add_files_to_page(files: FileList): void{
+        if(files.length < 100){
+            for (let i: number = 0; i < files.length; ++i) {
+                new SingleFile(files[i], i);
+            }
+        }
+        else{
+            throw new Error.TooManyFilesException(`You are trying to upload too many files! (${files.length})`);
+        }
     }
 
 }

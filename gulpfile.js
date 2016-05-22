@@ -64,7 +64,7 @@ gulp.task('typescript:babel', function()
             })
             .pipe(source(JS_BUILD_NAME))
             .pipe(buffer())
-            //.pipe(uglify())
+            .pipe(uglify())
             .pipe(gulp.dest(build_path.javascript));
     }
 
