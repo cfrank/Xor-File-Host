@@ -1,5 +1,5 @@
 import SingleFile from './File';
-import FileListUpload from './FileUpload';
+import * as Upload from './FileUpload';
 /*
  * Takes a list of files being uploaded
  */
@@ -17,10 +17,17 @@ export default class Files
         }
 
         // Start uploading the file
-        let upload: FileListUpload = new FileListUpload('server/upload404.php',
+        let upload: Upload.FileListUpload = new Upload.FileListUpload('server/upload404.php',
                                                         'files[]',
                                                         files);
         upload.upload();
+
+        upload.on('progress', (event: ProgressEvent, files: Upload.IFileList): void => {
+            for (let i: number = 0; i < files.length; ++i){
+                let file_progress: HTMLElement = <HTMLElement>document.querySelectorAll('.file-progress')[i];
+                file_progress.style.width = files[i].percent_uploaded + '%';
+            }
+        }, false);
     }
 
     /*

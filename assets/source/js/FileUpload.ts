@@ -1,16 +1,16 @@
 import TEventEmit from './Events/TEventEmit';
 
-interface IFileList extends FileList{
+export interface IFileList extends FileList{
     [index: number]: IFile;
     prev_uploaded: number;
 }
 
-interface IFile extends File{
+export interface IFile extends File{
     percent_uploaded: number;
     uploadedSize: number;
 }
 
-export default class FileListUpload extends TEventEmit {
+export class FileListUpload extends TEventEmit {
     url: string;
     field: string;
     method: string = 'POST';
@@ -58,13 +58,12 @@ export default class FileListUpload extends TEventEmit {
                     this.files[i].uploadedSize = Math.min(new_size, this.files[i].size);
                     if(this.files[i].uploadedSize !== this.files[i].size){
                         let percent: number = (this.files[i].uploadedSize / this.files[i].size) * 100;
-                        console.log(i + ' ' + percent);
+                        this.files[i].percent_uploaded = percent;
                     }
                     else if(this.files[i].uploadedSize === this.files[i].size
                             && this.files[i].percent_uploaded !== 100){
                         let percent: number = (this.files[i].uploadedSize / this.files[i].size) * 100;
                         this.files[i].percent_uploaded = percent;
-                        console.log(i + ' ' + percent);
                     }
                 }
                 this.files.prev_uploaded += loaded;
