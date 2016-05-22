@@ -2,11 +2,11 @@ import TEventEmit from './Events/TEventEmit';
 
 interface IFileList extends FileList{
     [index: number]: IFile;
-    current: IFile;
+    prev_uploaded: number;
 }
 
 interface IFile extends File{
-    percentUploaded: number;
+    percent_uploaded: number;
     uploadedSize: number;
 }
 
@@ -43,45 +43,44 @@ export default class FileListUpload extends TEventEmit {
 
         /* Set the initial uploadedSize */
         xhr.addEventListener('loadstart', (e: ProgressEvent): void => {
+            this.files.prev_uploaded = 0;
             for (let i: number = 0; i < this.files_length; ++i) {
                 this.files[i].uploadedSize = 0;
             }
         });
 
-        xhr.addEventListener('progress', (e: ProgressEvent): void => {
+        xhr.upload.addEventListener('progress', (e: ProgressEvent): void => {
             if(e.lengthComputable){
-                let loaded: number = e.loaded;
-                /* 
-                    From here we will give an estimate for each file on its
-                    progress
-                */
-                for (let i: number = 0; i < this.files_length; ++i) {
-                    let file_size: number = this.files[i].size;
-                    let difference: number = file_size - loaded;
-                    if(difference >= 0 && i === 0){
-                        this.files[i].uploadedSize = difference;
+                let total_loaded: number = e.loaded;
+                let loaded: number = total_loaded - this.files.prev_uploaded;
+                for (let i: number = 0; i < this.files_length; ++i){
+                    let new_size: number = this.files[i].uploadedSize + loaded;
+                    this.files[i].uploadedSize = Math.min(new_size, this.files[i].size);
+                    if(this.files[i].uploadedSize !== this.files[i].size){
+                        let percent: number = (this.files[i].uploadedSize / this.files[i].size) * 100;
+                        console.log(i + ' ' + percent);
                     }
-                    else if(difference >= 0 && i > 0){
-                        if (this.files[i - 1].uploadedSize === this.files[i - 1].size){
-                            break;
-                        }
-                        else{
-                            this.files[i].uploadedSize = difference;
-                        }
-                    }
-                    else{
-                        /*
-                            There is an overflow of size which needs to be sent
-                            to the next file.
-                        */
-                        difference = Math.abs(difference);
-                        let leftover: number = file_size - this.files[i].uploadedSize;
-                        this.files[i].uploadedSize = file_size;
-                        this.files[i + 1].uploadedSize = difference - leftover;
+                    else if(this.files[i].uploadedSize === this.files[i].size
+                            && this.files[i].percent_uploaded !== 100){
+                        let percent: number = (this.files[i].uploadedSize / this.files[i].size) * 100;
+                        this.files[i].percent_uploaded = percent;
+                        console.log(i + ' ' + percent);
                     }
                 }
+                this.files.prev_uploaded += loaded;
             }
             this.emit('progress', [e, this.files]);
-        });
+        }, false);
+
+        xhr.upload.addEventListener('loadstart', (e: ProgressEvent): void =>{
+            this.emit('loadstart', [e]);
+        }, false);
+
+        xhr.upload.addEventListener('load', (e: ProgressEvent): void =>{
+            console.log('finished');
+            this.emit('load', [e]);
+        }, false);
+
+        xhr.send(data);
     }
 }

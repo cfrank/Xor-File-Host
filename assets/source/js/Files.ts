@@ -17,7 +17,7 @@ export default class Files
         }
 
         // Start uploading the file
-        let upload: FileListUpload = new FileListUpload('server/upload.php',
+        let upload: FileListUpload = new FileListUpload('server/upload404.php',
                                                         'files[]',
                                                         files);
         upload.upload();
