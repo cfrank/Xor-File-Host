@@ -97,7 +97,7 @@ function get_file_logo(file_mime: string): string{
 /*
  * Turns a file size in bytes into a human readable string 
  */
-function get_human_file_size(file_size: number): string{
+export function get_human_file_size(file_size: number): string{
     let units: Array<string> = ["B", "KB", "MB", "GB", "TB"];
     let e: number = (Math.log(file_size) / Math.log(1024)) >> 0;
     return (file_size / Math.pow(1024, e)).toFixed(2) + " " + units[e];

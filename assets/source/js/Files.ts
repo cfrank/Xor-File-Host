@@ -1,6 +1,9 @@
 import SingleFile from './File';
 import * as Upload from './FileUpload';
 import BaseError from './Error';
+import {get_human_file_size} from './utils';
+import * as Settings from './Settings';
+
 /*
  * Takes a list of files being uploaded
  */
@@ -48,21 +51,29 @@ export default class Files
     /*
      * Returns the number of files in the list
      */
-    public get_length(): number{
-        return this.files_length;
+    public get_size(files: FileList): number{
+        let size: number = 0;
+        for (let i: number = 0; i < files.length; ++i){
+            size += files[i].size;
+        }
+        return size;
     }
 
     /*
      * Add a file to the page
      */
     private add_files_to_page(files: FileList): void{
-        if(files.length < 100){
+        if(files.length > Settings.FILE_LENGTH_LIMIT){
+            throw new BaseError(`You are trying to upload too many files! (${files.length})`);
+        }
+        else if(this.get_size(files) > Settings.FILE_SIZE_LIMIT){
+            let size: string = get_human_file_size(this.get_size(files));
+            throw new BaseError(`Your file(s) are too large! (${size})`);
+        }
+        else{
             for (let i: number = 0; i < files.length; ++i) {
                 new SingleFile(files[i], i);
             }
-        }
-        else{
-            throw new BaseError(`You are trying to upload too many files! (${files.length})`);
         }
     }
 
