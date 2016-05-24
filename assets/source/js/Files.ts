@@ -1,6 +1,6 @@
 import SingleFile from './File';
 import * as Upload from './FileUpload';
-import * as Error from './Error';
+import BaseError from './Error';
 /*
  * Takes a list of files being uploaded
  */
@@ -62,7 +62,7 @@ export default class Files
             }
         }
         else{
-            throw new Error.TooManyFilesException(`You are trying to upload too many files! (${files.length})`);
+            throw new BaseError(`You are trying to upload too many files! (${files.length})`);
         }
     }
 

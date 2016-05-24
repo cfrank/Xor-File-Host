@@ -52,6 +52,5 @@ export default class Xor
 
         intro_fc.style.display = "none";
         files_fc.style.display = "block";
-
     }
 }
