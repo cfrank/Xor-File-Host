@@ -1,12 +1,10 @@
 <?hh
-    // Check if we can gzip our output
-    if(!ob_start(ob_gzhandler)){
-        ob_start();
-    }
+    session_start();
 
     include_once 'includes/settings.php';
     include_once 'includes/database.inc.php';
     include_once 'classes/Response.php';
+    include_once 'utils/organizeFiles.php';
 
     if(!PRODUCTION && $_SERVER['REQUEST_METHOD'] == 'GET'){
         echo 'Only POST requests are accepted';
@@ -19,7 +17,7 @@
      */
     $response = new Response();
     if(isset($_FILES['files'])){
-        var_dump($_FILES['files']);
+        var_dump(organize_files($_FILES['files']));
     }
     else{
         $response->error(400, 'No input file(s)!');

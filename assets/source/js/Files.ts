@@ -24,7 +24,7 @@ export default class Files
         }
 
         // Start uploading the file
-        let upload: Upload.FileListUpload = new Upload.FileListUpload('server/upload404.php',
+        let upload: Upload.FileListUpload = new Upload.FileListUpload('server/upload.php',
                                                         'files[]',
                                                         files);
         upload.upload();
@@ -36,8 +36,12 @@ export default class Files
             }
         }, false);
 
-        upload.on('load', (event: ProgressEvent): void =>{
+        upload.on('UploadComplete', (event: ProgressEvent): void => {
             console.log(event);
+        }, true);
+
+        upload.on('Complete', (event: ProgressEvent, response: string): void =>{
+            console.log(response);
         }, true);
     }
 
