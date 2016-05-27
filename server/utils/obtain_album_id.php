@@ -16,11 +16,11 @@
             $query->execute();
             $result = $query->fetchColumn();
             if($result == 0){
-                create_album_id($id);
+                save_album_id($id);
                 return $id;
             }
         }
-
+        
         throw new Exception('Gave up trying to find album ID', 500);
     }
 
@@ -43,7 +43,7 @@
      * Once an available albumn ID has been found add it to
      * the database so it can't be used again
      */
-    function create_album_id(string $id): void{
+    function save_album_id(string $id): void{
         $db =& $GLOBALS['db'];
         $query = $db->prepare('INSERT INTO album (id) VALUES (:id)');
         $query->bindValue(':id', $id, PDO::PARAM_STR);
