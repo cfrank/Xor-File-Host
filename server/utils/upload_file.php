@@ -10,13 +10,9 @@
         if($file->error){
             throw new UploadException($file->error);
         }
-
-        $query = $db->prepare('SELECT * FROM files');
-        $query->execute();
-        $result = $query->fetch();
-        var_dump($query);
-        return array(
-            'result' => $result
-        );
-
+        else{
+            return array(
+                'hello' => 'hello'
+            );
+        }
     }

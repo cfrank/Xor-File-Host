@@ -17,3 +17,9 @@
     $XOR_DB_OPTIONS = array(
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'
     );
+
+    // ID Creation settings
+    define('XOR_ID_MAX_TRIES', 5);
+
+    // Album settings
+    define('XOR_ALBUM_ID_LENGTH', 10);
