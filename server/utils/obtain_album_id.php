@@ -9,7 +9,7 @@
         $db =& $GLOBALS['db'];
         $id = null;
 
-        for($i = 0; $i < 0; ++$i){
+        for($i = 0; $i < XOR_ID_MAX_TRIES; ++$i){
             $id = get_id();
             $query = $db->prepare('SELECT COUNT(id) FROM album WHERE id = (:id)');
             $query->bindValue(':id', $id, PDO::PARAM_STR);
