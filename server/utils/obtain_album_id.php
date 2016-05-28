@@ -1,5 +1,6 @@
 <?hh
     include_once 'includes/settings.php';
+    include_once 'includes/database.inc.php';
     /*
      * Try to find an album id.
      * Need to check the db for a unique id

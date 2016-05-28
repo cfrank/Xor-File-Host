@@ -74,6 +74,9 @@ export default class Files
             let size: string = get_human_file_size(this.get_size(files));
             throw new BaseError(`Your file(s) are too large! (${size})`);
         }
+        else if(this.get_size(files) <= 0){
+            throw new BaseError("You are trying to upload an empty file!");
+        }
         else{
             for (let i: number = 0; i < files.length; ++i) {
                 new SingleFile(files[i], i);

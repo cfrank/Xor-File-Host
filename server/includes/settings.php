@@ -20,6 +20,10 @@
 
     // ID Creation settings
     define('XOR_ID_MAX_TRIES', 5);
+    define('XOR_KEYSPACE', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
 
     // Album settings
     define('XOR_ALBUM_ID_LENGTH', 10);
+
+    // URL For Images
+    define('XOR_URL', 'https://xor.al/f/');
