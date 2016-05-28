@@ -3,7 +3,7 @@
     include_once 'classes/UploadedFile.php';
     include_once 'classes/UploadFileException.php';
 
-    function upload_file(UploadedFile $file): array<string, mixed>{
+    function upload_file(UploadedFile $file, ?string $album_id): array<string, mixed>{
         $db =& $GLOBALS['db'];
 
         /* Check for any file errors */

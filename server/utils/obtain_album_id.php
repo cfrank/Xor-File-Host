@@ -11,7 +11,7 @@
 
         for($i = 0; $i < XOR_ID_MAX_TRIES; ++$i){
             $id = get_id();
-            $query = $db->prepare('SELECT COUNT(id) FROM album WHERE id = (:id)');
+            $query = $db->prepare('SELECT COUNT(id) FROM albumids WHERE id = (:id)');
             $query->bindValue(':id', $id, PDO::PARAM_STR);
             $query->execute();
             $result = $query->fetchColumn();
@@ -20,7 +20,7 @@
                 return $id;
             }
         }
-        
+
         throw new Exception('Gave up trying to find album ID', 500);
     }
 
@@ -45,7 +45,7 @@
      */
     function save_album_id(string $id): void{
         $db =& $GLOBALS['db'];
-        $query = $db->prepare('INSERT INTO album (id) VALUES (:id)');
+        $query = $db->prepare('INSERT INTO albumids (id) VALUES (:id)');
         $query->bindValue(':id', $id, PDO::PARAM_STR);
         $query->execute();
     }

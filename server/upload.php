@@ -35,7 +35,7 @@
         }
         try{
             for($i = 0; $i < $files_length; ++$i){
-                $res[] = upload_file($uploads[$i]);
+                $res[] = upload_file($uploads[$i], $album_id);
             }
             /* Moved all files onto server now to respond with link */
             $response->send([$album_id]);
