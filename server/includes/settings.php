@@ -7,6 +7,11 @@
 
     define('PRODUCTION', true);
 
+    // Where to put uploaded files
+    define('XOR_FILE_ROOT', '/var/www/xor.al/files/');
+    define('XOR_ALBUM_URL', 'https://a.xor.al/');
+    define('XOR_FILE_URL', 'https://f.xor.al/');
+
     // Database connection information
     define('XOR_DB_CONN', 'mysql:host=127.0.0.1;dbname=xor');
 
@@ -25,5 +30,5 @@
     // Album settings
     define('XOR_ALBUM_ID_LENGTH', 10);
 
-    // URL For Images
-    define('XOR_URL', 'https://xor.al/f/');
+    // File settings
+    define('XOR_FILE_ID_LENGTH', 10);

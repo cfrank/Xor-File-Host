@@ -1,6 +1,7 @@
 <?hh
     include_once 'includes/settings.php';
     include_once 'includes/database.inc.php';
+    include_once 'utils/get_id.php';
     /*
      * Try to find an album id.
      * Need to check the db for a unique id
@@ -11,7 +12,7 @@
         $id = null;
 
         for($i = 0; $i < XOR_ID_MAX_TRIES; ++$i){
-            $id = get_id();
+            $id = get_id(XOR_ALBUM_ID_LENGTH);
             $query = $db->prepare('SELECT COUNT(id) FROM albumids WHERE id = (:id)');
             $query->bindValue(':id', $id, PDO::PARAM_STR);
             $query->execute();
@@ -23,21 +24,6 @@
         }
 
         throw new Exception('Gave up trying to find album ID', 500);
-    }
-
-    /*
-     * Create a psuedo random string to use as the album id
-     */
-    function get_id(): string{
-        $id_length = XOR_ALBUM_ID_LENGTH;
-        $keyspace = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        $keyspace_length = strlen($keyspace);
-        $id = '';
-        for($i = 0; $i < $id_length; ++$i){
-            $index_random = mt_rand(0, $keyspace_length - 1);
-            $id .= $keyspace[$index_random];
-        }
-        return $id;
     }
 
     /*
