@@ -41,7 +41,7 @@
             $response->send($result);
         }
         catch(Exception $e){
-            $response->error($e->getCode(), $e->getMessage());
+            $response->error(500, $e->getMessage());
             return false;
         }
     }

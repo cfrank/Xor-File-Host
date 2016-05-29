@@ -13,6 +13,33 @@
         }
 
         /*
+         * If the album ID is missing than this is a single file upload
+         * and we can check for duplicate images in the database since there
+         * is no album id which needs to be attached
+         */
+        if(!isset($album_id)){
+            /* Build query for checking against duplicate files in db */
+            $query = $db->prepare('SELECT filename, COUNT(*) AS count FROM files '.
+                            'WHERE hash = (:hash) AND size = (:size)');
+            $query->bindValue(':hash', $file->get_sha1($file->temp), PDO::PARAM_STR);
+            $query->bindValue(':size', $file->size, PDO::PARAM_INT);
+            $query->execute();
+            $result = $query->fetch();
+            if($result['count'] > 0){
+                /* Duplicates have been found remove the temp file */
+                unlink($file->temp);
+                /* And return the already exisiting file */
+                return array(
+                    'hash' => $file->get_sha1(XOR_FILE_ROOT.$result['filename']),
+                    'name' => $file->name,
+                    'url' => XOR_FILE_URL . $result['filename'],
+                    'size' => $file->size,
+                    'duplicate' => true
+                );
+            }
+        }
+
+        /*
          * This is one of the only variables which come from
          * the user and will be put into the database
          * so caution should be taken to make sure nothing fishy happens
@@ -40,9 +67,10 @@
 
                 return array(
                     'hash' => $file->get_sha1($new_file),
-                    'name' => $file->name,
+                    'name' => strip_tags($file->name), // User submitted
                     'url' => XOR_FILE_URL . $file_name,
-                    'size' => $file->size
+                    'size' => $file->size,
+                    'duplicate' => false
                 );
             }
             else{
