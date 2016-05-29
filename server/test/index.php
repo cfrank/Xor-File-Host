@@ -1,9 +1,8 @@
 <?hh
-    function test(string $hello, ?string $test){
-        if(isset($test)){
-            echo $test;
-        }
+    if(isset($_GET['hello'])){
+        echo $_GET['hello'];
     }
 
-    test('hello', 'world');
-    test('world', null);
+    if(isset($_GET['file'])){
+        echo 'File = ' . $_GET['file'];
+    }

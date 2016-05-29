@@ -4,4 +4,6 @@ assets/build/
 assets/source/babel/
 server/includes/private.inc.php
 server/test/
+server/vendor/
+server/composer.lock
 files/

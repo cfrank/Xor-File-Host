@@ -31,7 +31,7 @@
                 /* And return the already exisiting file */
                 return array(
                     'hash' => $file->get_sha1(XOR_FILE_ROOT.$result['filename']),
-                    'name' => $file->name,
+                    'name' => strip_tags($file->name),
                     'url' => XOR_FILE_URL . $result['filename'],
                     'size' => $file->size,
                     'duplicate' => true

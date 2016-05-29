@@ -20,6 +20,7 @@
     define('XOR_DB_PASS', DB_PASSWORD);
     // DB settings
     $XOR_DB_OPTIONS = array(
+        PDO::ATTR_EMULATE_PREPARES => false,
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'
     );
 
