@@ -19,25 +19,27 @@
          */
         $file_ext = get_file_ext($file->name);
 
-        /* Create a file id (.php) */
+        /* Create a file name (go.php) */
         $file_name = obtain_file_name($file, $file_ext);
 
         /* Upload the file */
         if(move_uploaded_file($file->temp, XOR_FILE_ROOT . $file_name)){
             if(chmod(XOR_FILE_ROOT . $file_name, 0644)){
+                /* The location of the new file on the filesystem */
+                $new_file = XOR_FILE_ROOT.$file_name;
                 /* Add the file to the database */
                 $query = $db->prepare('INSERT INTO files (albumid, hash, ' .
                                 'filename, size, date) VALUES (:albumid, ' .
                                 ':hash, :filename, :size, :date)');
                 $query->bindValue(':albumid', $album_id, PDO::PARAM_STR);
-                $query->bindValue(':hash', $file->get_sha1(), PDO::PARAM_STR);
+                $query->bindValue(':hash', $file->get_sha1($new_file), PDO::PARAM_STR);
                 $query->bindValue(':filename', $file_name, PDO::PARAM_STR);
                 $query->bindValue(':size', $file->size, PDO::PARAM_INT);
                 $query->bindValue(':date', date('Y-m-d'), PDO::PARAM_STR);
                 $query->execute();
 
                 return array(
-                    'hash' => $file->get_sha1(),
+                    'hash' => $file->get_sha1($new_file),
                     'name' => $file->name,
                     'url' => XOR_FILE_URL . $file_name,
                     'size' => $file->size

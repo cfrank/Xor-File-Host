@@ -4,3 +4,4 @@ assets/build/
 assets/source/babel/
 server/includes/private.inc.php
 server/test/
+files/
