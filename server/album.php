@@ -1,12 +1,14 @@
 <?hh
     require('vendor/autoload.php');
     include_once 'views/head.php';
-    include_once 'views/body.php';
+    include_once 'views/image_container.php';
 
     echo
     <x:doctype>
         <html>
-            {$head}
-            {$body}
+            <xor:headmeta title="Xor - File Hosting | Album" />
+            <body>
+                <xor:imagecontainer />
+            </body>
         </html>
     </x:doctype>;
