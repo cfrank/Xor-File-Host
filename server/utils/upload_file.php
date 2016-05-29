@@ -4,12 +4,12 @@
     include_once 'classes/UploadFileException.php';
     include_once 'utils/get_id.php';
 
-    function upload_file(UploadedFile $file, ?string $album_id): string{
+    function upload_file(UploadedFile $file, ?string $album_id): array<string, mixed>{
         $db =& $GLOBALS['db'];
 
         /* Check for any file errors */
         if($file->error){
-            return strval($file->error);
+            throw new UploadException($file->error);
         }
 
         /*
@@ -23,8 +23,34 @@
         $file_name = obtain_file_name($file, $file_ext);
 
         /* Upload the file */
-        
-        return $file_name;
+        if(move_uploaded_file($file->temp, XOR_FILE_ROOT . $file_name)){
+            if(chmod(XOR_FILE_ROOT . $file_name, 0644)){
+                /* Add the file to the database */
+                $query = $db->prepare('INSERT INTO files (albumid, hash, ' .
+                                'filename, size, date) VALUES (:albumid, ' .
+                                ':hash, :filename, :size, :date)');
+                $query->bindValue(':albumid', $album_id, PDO::PARAM_STR);
+                $query->bindValue(':hash', $file->get_sha1(), PDO::PARAM_STR);
+                $query->bindValue(':filename', $file_name, PDO::PARAM_STR);
+                $query->bindValue(':size', $file->size, PDO::PARAM_INT);
+                $query->bindValue(':date', date('Y-m-d'), PDO::PARAM_STR);
+                $query->execute();
+
+                return array(
+                    'hash' => $file->get_sha1(),
+                    'name' => $file->name,
+                    'url' => XOR_FILE_URL . $file_name,
+                    'size' => $file->size
+                );
+            }
+            else{
+                throw new Exception('Could not change file permissions', 500);
+            }
+        }
+        else{
+            /* Couldn't move the file */
+            throw new Exception('Could not move the file to destination', 500);
+        }
     }
 
     /*
