@@ -41,7 +41,7 @@
             $response->send($result);
         }
         catch(Exception $e){
-            $response->error(500, $e->getMessage());
+            $response->error($e->getCode(), $e->getMessage());
             return false;
         }
     }
@@ -51,4 +51,5 @@
     }
 
     // Null out the database
+    $db =& $GLOBALS['db'];
     $db = null;
