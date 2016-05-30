@@ -14,8 +14,8 @@
 --
 
 CREATE TABLE `albumids` (
-  `id` char(10) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+    `id` char(10) NOT NULL
+)ENGINE=INNODB;
 
 
 --
@@ -23,11 +23,11 @@ CREATE TABLE `albumids` (
 --
 
 CREATE TABLE `files` (
-  `id` int(10) UNSIGNED AUTO_INCREMENT NOT NULL,
-  `albumid` char(10) COLLATE utf8_bin DEFAULT NULL,
-  `hash` char(40) COLLATE utf8_bin DEFAULT NULL,
-  `filename` varchar(30) COLLATE utf8_bin DEFAULT NULL,
-  `size` int(10) UNSIGNED DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+    `id` int(10) UNSIGNED AUTO_INCREMENT NOT NULL,
+    `albumid` char(10) DEFAULT NULL,
+    `hash` char(40) DEFAULT NULL,
+    `filename` varchar(30) DEFAULT NULL,
+    `size` int(10) UNSIGNED DEFAULT NULL,
+    `date` date DEFAULT NULL,
+    PRIMARY KEY (`id`)
+)ENGINE=INNODB;
