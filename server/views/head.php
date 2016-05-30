@@ -11,6 +11,8 @@
         protected string $tagname = 'xor:headmeta';
 
         protected function render(): XHPRoot{
+            $stylesheet = XOR_URL.'/assets/build/css/build.css';
+
             return
                 <head>
                     <title>{$this->getAttribute('title')}</title>
@@ -25,7 +27,7 @@
                     <meta property="og:url" content="https://xor.al" />
                     <meta property="og:site-name" content="Xor al" />
 
-                    <link rel="stylesheet" type="text/css" href="http://xor.build/assets/build/css/build.css" />
+                    <link rel="stylesheet" type="text/css" href={$stylesheet} />
                 </head>;
         }
     }

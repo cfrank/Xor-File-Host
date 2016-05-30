@@ -9,7 +9,7 @@
     define('XOR_URL','https://xor.al');
 
     // Where to put uploaded files
-    define('XOR_FILE_ROOT', '/var/www/xor.al/files/');
+    define('XOR_FILE_ROOT', '/var/www/html/xor.al/files/');
     define('XOR_ALBUM_URL', 'https://a.xor.al/');
     define('XOR_FILE_URL', 'https://f.xor.al/');
     define('XOR_BUILD_FILE_URL', 'http://f.xor.build/');
@@ -20,7 +20,7 @@
 
     // DB user and password
     define('XOR_DB_USER', 'xor');
-    define('XOR_DB_PASS', DB_PASSWORD);
+    define('XOR_DB_PASS', $DB_PASSWORD);
     // DB settings
     $XOR_DB_OPTIONS = array(
         PDO::ATTR_EMULATE_PREPARES => false,

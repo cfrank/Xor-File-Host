@@ -39,7 +39,7 @@
             }
             /* Moved all files onto server now to respond with link */
             if(isset($album_id) && count($result) > 1){
-                $response->return_url(XOR_BUILD_ALBUM_URL.$album_id);
+                $response->return_url(XOR_ALBUM_URL.$album_id);
             }
             else{
                 $response->return_url($result[0]['url']);

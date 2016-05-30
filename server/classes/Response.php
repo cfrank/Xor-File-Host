@@ -9,39 +9,39 @@
         }
 
         public function error(int $code, string $message): void{
-            $response = null;
+            $response_error = null;
 
-            $response = json_encode(array(
+            $response_error = json_encode(array(
                 'success' => false,
                 'errorcode' => $code,
                 'description' => $message
             ));
 
             http_response_code($code);
-            echo $response;
+            echo $response_error;
         }
 
         public function send(array $files): void{
-            $response = null;
+            $response_success = null;
 
-            $response = json_encode(array(
+            $response_success = json_encode(array(
                 'success' => true,
                 'files' => $files
             ));
 
             http_response_code(200);
-            echo $response;
+            echo $response_success;
         }
 
         public function return_url(string $url): void{
-            $response = null;
+            $response_url = null;
 
-            $response = json_encode(array(
+            $response_url = json_encode(array(
                 'success' => true,
                 'url' => $url
             ));
 
             http_response_code(200);
-            echo $response;
+            echo $response_url;
         }
     }
