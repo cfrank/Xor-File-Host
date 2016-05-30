@@ -32,7 +32,11 @@ export default class Files
         upload.on('progress', (event: ProgressEvent, files: Upload.IFileList): void => {
             for (let i: number = 0; i < files.length; ++i){
                 let file_progress: HTMLElement = <HTMLElement>document.querySelectorAll('.file-progress')[i];
-                file_progress.style.width = files[i].percent_uploaded + '%';
+                let percent_uploaded: number = files[i].percent_uploaded;
+                file_progress.style.width = percent_uploaded + '%';
+                if(percent_uploaded === 100){
+                    file_progress.style.backgroundColor = 'rgb(235, 254, 217)';
+                }
             }
         }, false);
 

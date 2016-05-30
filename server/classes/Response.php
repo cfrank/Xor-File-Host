@@ -32,4 +32,13 @@
             http_response_code(200);
             echo $response;
         }
+
+        public function return_url(string $url): void{
+            $response = null;
+
+            $response = json_encode($url);
+
+            http_response_code(200);
+            echo $response;
+        }
     }

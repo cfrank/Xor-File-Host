@@ -38,7 +38,12 @@
                 $result[] = upload_file($uploads[$i], $album_id);
             }
             /* Moved all files onto server now to respond with link */
-            $response->send($result);
+            if(isset($album_id) && count($result) > 1){
+                $response->return_url(XOR_ALBUM_URL.$album_id);
+            }
+            else{
+                $response->return_url($result[0]['url']);
+            }
         }
         catch(Exception $e){
             $response->error($e->getCode(), $e->getMessage());
