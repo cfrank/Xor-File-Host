@@ -14,7 +14,7 @@
 --
 
 CREATE TABLE `albumids` (
-    `id` char(10) NOT NULL
+    `id` char(5) NOT NULL
 )ENGINE=INNODB;
 
 
@@ -24,7 +24,7 @@ CREATE TABLE `albumids` (
 
 CREATE TABLE `files` (
     `id` int(10) UNSIGNED AUTO_INCREMENT NOT NULL,
-    `albumid` char(10) DEFAULT NULL,
+    `albumid` char(5) DEFAULT NULL,
     `hash` char(40) DEFAULT NULL,
     `filename` varchar(30) DEFAULT NULL,
     `size` int(10) UNSIGNED DEFAULT NULL,

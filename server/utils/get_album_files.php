@@ -1,5 +1,6 @@
 <?hh
     include_once 'includes/database.inc.php';
+    include_once 'includes/settings.php';
     include_once 'utils/organizeFiles.php';
 
     function get_album_files(): array<string>{
@@ -8,7 +9,7 @@
         $files = array();
 
         /* Make sure the id is valid */
-        if(strlen($album_id) === 10){
+        if(strlen($album_id) === XOR_ALBUM_ID_LENGTH){
             /* Get a list of files */
             $query = $db->prepare('SELECT * FROM files WHERE albumid = '.
                             '(:albumid)');

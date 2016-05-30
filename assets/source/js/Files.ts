@@ -52,7 +52,7 @@ export default class Files
                 this.show_url(url);
             }
             else{
-                throw new BaseError('Could not retrieve the url!');
+                throw new BaseError(`Error: ${json_response['description']}`);
             }
         }, true);
     }

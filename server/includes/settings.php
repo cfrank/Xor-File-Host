@@ -29,10 +29,10 @@
 
     // ID Creation settings
     define('XOR_ID_MAX_TRIES', 5);
-    define('XOR_KEYSPACE', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+    define('XOR_KEYSPACE', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_');
 
     // Album settings
-    define('XOR_ALBUM_ID_LENGTH', 10);
+    define('XOR_ALBUM_ID_LENGTH', 5);
 
     // File settings
-    define('XOR_FILE_ID_LENGTH', 10);
+    define('XOR_FILE_ID_LENGTH', 5);
