@@ -1,6 +1,6 @@
 <?hh
     include_once 'utils/get_album_files.php';
-    include_once 'settings.php';
+    include_once 'includes/settings.php';
     include_once 'views/file.php';
 
     /*
