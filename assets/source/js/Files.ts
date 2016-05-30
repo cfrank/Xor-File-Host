@@ -45,7 +45,15 @@ export default class Files
         }, true);
 
         upload.on('Complete', (event: ProgressEvent, response: string): void =>{
-            console.log(response);
+            let json_response: Object = JSON.parse(response);
+            let url:string = null;
+            if(json_response['success'] === true){
+                url = json_response['url'];
+                this.show_url(url);
+            }
+            else{
+                throw new BaseError('Could not retrieve the url!');
+            }
         }, true);
     }
 
@@ -86,5 +94,30 @@ export default class Files
                 new SingleFile(files[i], i);
             }
         }
+    }
+
+    /*
+     * Show the url of the album or file to the page
+     */
+    private show_url(url: string): void{
+        let intro_fc: HTMLElement = <HTMLElement>document.querySelector('.form-content.no-upload');
+        let files_fc: HTMLElement = <HTMLElement>document.querySelector('.form-content.file-list');
+        let title: HTMLElement = <HTMLElement>document.querySelector('.title > p');
+        let link_elem: HTMLElement = document.createElement('a');
+
+        /* Show the intro form container */
+        intro_fc.style.display = 'block';
+        intro_fc.style.minHeight = 'unset';
+        files_fc.style.display = 'none';
+        /* Update the title */
+        title.innerHTML = 'Your links';
+        /* Create the link */
+        link_elem.setAttribute('href', url);
+        link_elem.setAttribute('target', '_blank');
+        link_elem.classList.add('url');
+        link_elem.innerHTML = url;
+        /* Clear out intro container and add link to it */
+        intro_fc.innerHTML = "";
+        intro_fc.appendChild(link_elem);
     }
 }

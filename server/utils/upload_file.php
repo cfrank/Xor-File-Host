@@ -32,7 +32,7 @@
                 return array(
                     'hash' => $file->get_sha1(XOR_FILE_ROOT.$result['filename']),
                     'name' => strip_tags($file->name),
-                    'url' => XOR_FILE_URL . $result['filename'],
+                    'url' => XOR_BUILD_FILE_URL . $result['filename'],
                     'size' => $file->size,
                     'duplicate' => true
                 );
@@ -68,7 +68,7 @@
                 return array(
                     'hash' => $file->get_sha1($new_file),
                     'name' => strip_tags($file->name), // User submitted
-                    'url' => XOR_FILE_URL . $file_name,
+                    'url' => XOR_BUILD_FILE_URL . $file_name,
                     'size' => $file->size,
                     'duplicate' => false
                 );

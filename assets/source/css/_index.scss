@@ -79,6 +79,14 @@
                     color: #dddddd;
                     text-align: center;
                 }
+
+                /* When showing the link */
+                .url{
+                    display: block;
+                    text-align: center;
+                    color: $xor-blue;
+                    font-size: 25px;
+                }
             }
 
             &.file-list{

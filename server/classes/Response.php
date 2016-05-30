@@ -36,7 +36,10 @@
         public function return_url(string $url): void{
             $response = null;
 
-            $response = json_encode($url);
+            $response = json_encode(array(
+                'success' => true,
+                'url' => $url
+            ));
 
             http_response_code(200);
             echo $response;

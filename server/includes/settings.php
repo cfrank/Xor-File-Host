@@ -13,6 +13,7 @@
     define('XOR_ALBUM_URL', 'https://a.xor.al/');
     define('XOR_FILE_URL', 'https://f.xor.al/');
     define('XOR_BUILD_FILE_URL', 'http://f.xor.build/');
+    define('XOR_BUILD_ALBUM_URL', 'http://a.xor.build/');
 
     // Database connection information
     define('XOR_DB_CONN', 'mysql:host=127.0.0.1;dbname=xor');

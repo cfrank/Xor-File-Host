@@ -16,13 +16,20 @@
             $query->execute();
             $result = $query->fetchAll();
 
-            /* Organize the result into more manageable files array */
-            for($i = 0; $i < count($result); ++$i){
-                $files[] = $result[$i]['filename'];
-            }
+            /* Check to see if the query returned anything */
+            if(count($result) > 0){
+                /* Organize the result into more manageable files array */
+                for($i = 0; $i < count($result); ++$i){
+                    $files[] = $result[$i]['filename'];
+                }
 
-            return $files;
-        }else{
-            throw new Exception('Couldnt find any files in the album', 500);
+                return $files;
+            }
+            else{
+                throw new Exception('Could not find any files with this Album ID', 500);
+            }
+        }
+        else{
+            throw new Exception('Album ID is not valid!', 500);
         }
     }
