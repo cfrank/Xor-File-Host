@@ -14,7 +14,9 @@
         protected function render(): XHPRoot{
             return
                 <li class="file">
-                    <img src={XOR_BUILD_FILE_URL.$this->getAttribute('filesrc')} />
+                    <a href={XOR_BUILD_FILE_URL.$this->getAttribute('filesrc')}>
+                        <img src={XOR_BUILD_FILE_URL.$this->getAttribute('filesrc')} />
+                    </a>
                 </li>;
         }
     }

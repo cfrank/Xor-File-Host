@@ -1,0 +1,49 @@
+.top-bar{
+    width: 100%;
+    height: 5px;
+    margin-bottom: 95px;
+
+    &.yellow{
+        background-color: $xor-yellow;
+        border-bottom: 1px solid #dcbd2f;
+    }
+
+    &.green{
+        background-color: $xor-green;
+        border-bottom: 1px solid #7cb029;
+    }
+
+    &.blue{
+        background-color: $xor-blue;
+        border-bottom: 1px solid #396dd0;
+    }
+
+    & > a{
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+}
+
+.image-container{
+    width: 70%;
+    margin: 0 auto;
+    position: relative;
+
+    .image-list{
+        list-style: none;
+
+        .file{
+            width: 100%;
+            height: auto;
+            margin: 0 auto 95px;
+            border: 1px solid #cacaca;
+            position: relative;
+
+            & img{
+                width: 100%;
+                border: 10px solid #f6f6f6;
+            }
+        }
+    }
+}
