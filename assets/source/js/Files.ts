@@ -110,7 +110,7 @@ export default class Files
         intro_fc.style.minHeight = 'unset';
         files_fc.style.display = 'none';
         /* Update the title */
-        title.innerHTML = 'Your links';
+        title.innerHTML = 'Your link';
         /* Create the link */
         link_elem.setAttribute('href', url);
         link_elem.setAttribute('target', '_blank');
