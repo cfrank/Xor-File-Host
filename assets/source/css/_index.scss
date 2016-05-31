@@ -32,7 +32,6 @@
             width: 100%;
             min-height: calc(80px * 4);
             max-height: 500px;
-            overflow-y: scroll;
             padding: 25px;
             background-color: #f6f9fb;
             border-top: 1px solid #e7e4d4;
@@ -93,6 +92,7 @@
             &.file-list{
                 min-height: unset;
                 display: none;
+                overflow-y: auto;
 
                 .file{
                     width: 90%;
