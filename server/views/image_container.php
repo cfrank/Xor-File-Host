@@ -22,15 +22,36 @@
 
                 /* Loop through the files and add them to the page */
                 foreach($files as $file){
+                    $file_is_image = $this->is_image($file);
                     $files_div->appendChild(
-                        <xor:file filesrc={$file} />
+                        <xor:file filesrc={$file} isimage={$file_is_image} />
                     );
                 }
                 return $files_div;
             }
             catch(Exception $e){
-                header('Location: '. XOR_URL, true, 302);
+                //header('Location: '. XOR_URL, true, 302);
+                var_dump($e);
                 exit(1);
+            }
+        }
+
+        /*
+         * Check if the file can be rendered as an image.
+         * Return 1 if true
+         * Return 0 if false
+         *
+         * XHP doesn't like boolean attributes so int values are better
+         */
+        protected function is_image(string $file): int{
+            $image_ext = array("jpg", "jpeg", "gif", "png", "apng", "svg", "bmp", "tiff");
+            $file_ext = explode('.', $file)[1];
+
+            if (in_array($file_ext, $image_ext)){
+                return 1;
+            }
+            else{
+                return 0;
             }
         }
 

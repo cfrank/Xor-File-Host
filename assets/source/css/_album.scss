@@ -47,6 +47,14 @@
                 outline: none;
             }
 
+            & > a.file_not_image{
+                height: 250px;
+                background-image: url($image-assets + 'folder.svg');
+                background-repeat: no-repeat;
+                background-size: 125px 125px;
+                background-position: center center;
+            }
+
             & img{
                 width: 100%;
                 display: block;

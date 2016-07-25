@@ -11,7 +11,7 @@ let gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename');
 
-const production = false;
+const production = true;
 const source_dir = 'assets/source';
 const build_dir = 'assets/build';
 /* Output file names */

@@ -2,6 +2,7 @@ node_modules/
 logs/
 assets/build/
 assets/source/babel/
+assets/img/
 server/includes/private.inc.php
 server/test/
 server/vendor/
