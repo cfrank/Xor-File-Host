@@ -30,8 +30,7 @@
                 return $files_div;
             }
             catch(Exception $e){
-                //header('Location: '. XOR_URL, true, 302);
-                var_dump($e);
+                header('Location: '. XOR_URL, true, 302);
                 exit(1);
             }
         }
